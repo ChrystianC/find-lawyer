@@ -19,3 +19,45 @@ model Specializations {
   idSpecialization String @id @default(uuid())
   specialization   String
 }
+
+model LawOffice {
+  idLawOffice          String        @id @default(uuid())
+  lawOfficeName        String
+  ratings              Ratings[]
+  officeSpecialization String
+  services             Services[]
+  city                 String
+  address              String
+  profile              String?
+  appointments         Appointment[]
+}
+
+model Services {
+  idService    String    @id @default(uuid())
+  serviceName  String
+  servicePrice String
+  lawOffice    LawOffice @relation(fields: [idOffice], references: [idLawOffice])
+  idOffice     String
+}
+
+model Ratings {
+  idRating  String    @id @default(uuid())
+  rating    Int
+  lawOffice LawOffice @relation(fields: [idOffice], references: [idLawOffice])
+  idOffice  String
+}
+
+model Appointment {
+  idAppointment        String     @id @default(uuid())
+  day                  DateTime
+  time                 Time[]
+  LawOffice            LawOffice? @relation(fields: [lawOfficeIdLawOffice], references: [idLawOffice])
+  lawOfficeIdLawOffice String?
+}
+
+model Time {
+  idTime                   String      @id @default(uuid())
+  time                     DateTime
+  Appointment              Appointment @relation(fields: [appointmentIdAppointment], references: [idAppointment])
+  appointmentIdAppointment String
+}
