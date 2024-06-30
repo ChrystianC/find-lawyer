@@ -11,10 +11,10 @@ export async function NavbarPage() {
                     <span className='ml-3 text-xl text-white'>Lawyler</span>
                 </a>
                 <nav className='md:ml-auto flex-wrap items-center text-base justify-center hidden lg:block'>
-                    <NavLink text='Advices' />
+                    {/* <NavLink text='Advices' />
                     <NavLink text='Second Link' />
                     <NavLink text='Third Link' />
-                    <NavLink text='Fourth Link' />
+                    <NavLink text='Fourth Link' /> */}
                 </nav>
                 <span className='lg:border-l lg:border-gray-700 lg:pl-6 lg:py-7'>
                 </span>

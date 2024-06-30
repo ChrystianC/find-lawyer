@@ -1,10 +1,13 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { format, addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, isSameMonth, isSameDay, parse } from 'date-fns';
 
-export default function Appoiments() {
+export default function Appoiments({ date }) {
     const [currentMonth, setCurrentMonth] = useState(new Date());
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+    const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+    useEffect(() => {
+        date(selectedDate);
+    }, [selectedDate])
     const renderHeader = () => {
         return (
             <div className="px-4 flex items-center justify-between">
@@ -70,8 +73,8 @@ export default function Appoiments() {
                 const cloneDay = day;
                 days.push(
                     <td key={day.toString()} className={`px-2 py-2 cursor-pointer  justify-center items-center text-center ${!isSameMonth(day, monthStart) ? 'text-gray-400' : isSameDay(day, selectedDate) ? 'bg-indigo-700 rounded-full text-white' : 'text-gray-800 dark:text-gray-100'}`} onClick={() => setSelectedDate(cloneDay)}>
-                    <span>{formattedDate}</span>
-                  </td>
+                        <span>{formattedDate}</span>
+                    </td>
                 );
                 day = addDays(day, 1);
             }
@@ -82,30 +85,15 @@ export default function Appoiments() {
     };
 
     return (
-        <div className="flex items-center justify-center py-4 px-4">
-            <div className="max-w-sm w-full shadow-lg overflow-y-auto lg:max-h-72 max-h-60">
-                <div className="md:p-8 p-5 dark:bg-gray-800 bg-white rounded-t">
-                    {renderHeader()}
-                    <div className="flex items-center justify-between pt-4 overflow-x-auto">
-                        <table className="w-full">
-                            {renderDays()}
-                            {renderCells()}
-                        </table>
-                    </div>
-                </div>
-                <div className="pt-2 md:px-16 px-5 dark:bg-gray-700 bg-gray-50 rounded-b">
-                    <div className="px-4">
-                        <div className="border-b pb-4 border-gray-400 border-dashed">
-                            <p className="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">Meeting time</p>
-                            <p className="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">9:00 AM</p>
-                        </div>
-                        <div className="border-b pb-4 border-gray-400 border-dashed mt-2">
-                            <p className="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">Meeting time</p>
-                            <p className="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">9:00 AM</p>
-                        </div>
-                    </div>
-                </div>
+        <div className="md:p-8 p-5 dark:bg-gray-800 bg-white rounded-t">
+            {renderHeader()}
+            <div className="flex items-center justify-between pt-4">
+                <table className="w-full">
+                    {renderDays()}
+                    {renderCells()}
+                </table>
             </div>
         </div>
+
     );
 };

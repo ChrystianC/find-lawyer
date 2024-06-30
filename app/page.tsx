@@ -1,15 +1,11 @@
-import { FeedbackPage, NavbarPage, SearchPage,Footer } from './components/index';
+import { FeedbackPage, NavbarPage, SearchPage, Footer } from './components/index';
 
 export default function Page() {
-  return <div className='min-h-screen'><header>
+  return <div className='min-h-screen'>
     <NavbarPage />
-  </header>
     <section className='bg-slate-50'>
-    <SearchPage />
-    <FeedbackPage />
+      <SearchPage />
+      <FeedbackPage />
     </section>
-    <footer>
-    <Footer />
-    </footer>
   </div>
 }

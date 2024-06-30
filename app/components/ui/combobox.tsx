@@ -105,7 +105,7 @@ export function MyCombobox(props: { mapLocation: Locations[], mapSpecialization:
     return (
         <>
             <div className='relative flex-grow w-full'>
-                <label className='leading-7 text-sm text-gray-300'>Specialization</label>
+                <label className='absolute bottom-10 leading-7 text-sm text-gray-300'>Specialization</label>
                 <Combobox value={selectedSpecialization} onChange={setSelectedselectedSpecialization}>
                     <div className='relative mt-1'>
                         <div className='relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md sm:text-sm'>
@@ -169,7 +169,7 @@ export function MyCombobox(props: { mapLocation: Locations[], mapSpecialization:
                 </Combobox>
             </div>
             <div className='relative flex-grow w-full '>
-                <label className='leading-7 text-sm text-gray-300'>Location</label>
+                <label className='absolute bottom-10 leading-7 text-sm text-gray-300'>Location</label>
                 <Combobox value={selectedLocation} onChange={setSelectedLocation}>
                     <div className='relative mt-1'>
                         <div className='relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md  sm:text-sm'>

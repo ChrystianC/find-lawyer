@@ -21,7 +21,7 @@ model Specializations {
 }
 
 model LawOffice {
-  idLawOffice          String        @id @default(uuid())
+  idLawOffice          String         @id @default(uuid())
   lawOfficeName        String
   ratings              Ratings[]
   officeSpecialization String
@@ -29,35 +29,31 @@ model LawOffice {
   city                 String
   address              String
   profile              String?
-  appointments         Appointment[]
+  appointments         Appointments[]
 }
 
 model Services {
   idService    String    @id @default(uuid())
   serviceName  String
   servicePrice String
-  lawOffice    LawOffice @relation(fields: [idOffice], references: [idLawOffice])
+  lawOffice    LawOffice @relation(fields: [idOffice], references: [idLawOffice], onDelete: Cascade)
   idOffice     String
 }
 
 model Ratings {
   idRating  String    @id @default(uuid())
   rating    Int
-  lawOffice LawOffice @relation(fields: [idOffice], references: [idLawOffice])
+  lawOffice LawOffice @relation(fields: [idOffice], references: [idLawOffice], onDelete: Cascade)
   idOffice  String
 }
 
-model Appointment {
-  idAppointment        String     @id @default(uuid())
-  day                  DateTime
-  time                 Time[]
-  LawOffice            LawOffice? @relation(fields: [lawOfficeIdLawOffice], references: [idLawOffice])
-  lawOfficeIdLawOffice String?
-}
-
-model Time {
-  idTime                   String      @id @default(uuid())
-  time                     DateTime
-  Appointment              Appointment @relation(fields: [appointmentIdAppointment], references: [idAppointment])
-  appointmentIdAppointment String
+model Appointments {
+  idAppointment String   @id @default(uuid())
+  date          DateTime
+  lawOffice            LawOffice @relation(fields: [IdOffice], references: [idLawOffice], onDelete: Cascade)
+  IdOffice String
+  isBooked             Boolean    @default(false)
+  createdAt            DateTime   @default(now())
+  customer             String     @default(uuid())
+  service              String
 }

@@ -1,5 +1,6 @@
-import { Specializations, Locations, LawOffice, Ratings, Services } from '@prisma/client';
+import { Specializations, Locations, LawOffice, Ratings, Services, Appointments } from '@prisma/client';
 import { prisma } from '../../prisma/db';
+import dayjs from 'dayjs';
 
 export async function getSpecializationFromParam(params: string) {
     const paramsArray = params.split('=');
@@ -41,4 +42,28 @@ export async function getSpecializations() {
 export async function getLocations() {
     const locations: Locations[] = await prisma.locations.findMany();
     return locations;
+}
+
+export async function getAppointment(officeId: string) {
+    const reviews: Appointments[] = await prisma.appointments.findMany({ where: { IdOffice: { equals: officeId } } });
+    return reviews;
+}
+
+export async function getAppointmentsList(date: Date, officeId: string) {
+    const day = dayjs(date).toDate()
+    const nextDay = dayjs(date).add(1, 'day').toDate();
+
+    const appointments: Appointments[] = await prisma.appointments.findMany({
+        where:
+        {
+            date: {
+                gte: day,
+                lt: nextDay,
+            },
+            IdOffice: {
+                equals: officeId
+            }
+        }
+    });
+    return appointments;
 }
