@@ -1,4 +1,4 @@
-import { Specializations, Locations, LawOffice, Ratings, Services, Appointments } from '@prisma/client';
+import { Specializations, Locations, LawOffice, Ratings, Services, Appointments, Comments } from '@prisma/client';
 import { prisma } from '../../prisma/db';
 import dayjs from 'dayjs';
 
@@ -66,4 +66,28 @@ export async function getAppointmentsList(date: Date, officeId: string) {
         }
     });
     return appointments;
+}
+
+export async function getLawOffice ( lawOfficeId: string )
+{
+    const lawOffice: LawOffice = await prisma.lawOffice.findFirst( {
+        where: {
+            idLawOffice: {
+                equals: lawOfficeId
+            }
+        }
+    } );
+    return lawOffice;
+}
+
+export async function getComments ( lawOfficeId: string )
+{
+    const comments: Comments[] = await prisma.comments.findMany( {
+        where: {
+            idOffice: {
+                equals: lawOfficeId
+            }
+        }
+    } );
+    return comments;
 }

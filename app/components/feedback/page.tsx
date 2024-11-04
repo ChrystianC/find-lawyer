@@ -1,6 +1,6 @@
 
 import Link from 'next/dist/client/link';
-import { getLocation, getSpecializations } from '../../Api';
+import { getLocation, getSpecializations } from '../../serverComponent';
 
 
 export async function FeedbackPage() {

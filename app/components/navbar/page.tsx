@@ -19,7 +19,7 @@ export async function NavbarPage() {
                 <span className='lg:border-l lg:border-gray-700 lg:pl-6 lg:py-7'>
                 </span>
                 <div>
-                    <button className='border-5 border-transparent inline-block hover:border-gray-700 text-gray-500 font-semibold hover:text-white py-2 px-4 border rounded'>LOGIN</button>
+                <Link className='border-5 border-transparent inline-block hover:border-gray-700 text-gray-500 font-semibold hover:text-white py-2 px-4 border rounded' href={'/components/login/user'}>Login</Link>
                     <button className='border-5 border-transparent inline-block hover:border-gray-700 text-gray-500 font-semibold hover:text-white py-2 px-4 border rounded'>Login Kancelaria</button>
                 </div>
             </div>

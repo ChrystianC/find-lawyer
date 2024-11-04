@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 export default function AddReview({ create, office }) {
     const [rating, setRating] = useState(null);

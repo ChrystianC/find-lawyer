@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url    = env("DATABASE_URL")
 }
 
 model Locations {
@@ -30,6 +30,8 @@ model LawOffice {
   address              String
   profile              String?
   appointments         Appointments[]
+  comments             Comments[]
+  email                String?         @unique
 }
 
 model Services {
@@ -45,15 +47,37 @@ model Ratings {
   rating    Int
   lawOffice LawOffice @relation(fields: [idOffice], references: [idLawOffice], onDelete: Cascade)
   idOffice  String
+  user      User?      @relation(fields: [idUser], references: [idUser])
+  idUser    String?
 }
 
 model Appointments {
-  idAppointment String   @id @default(uuid())
+  idAppointment String    @id @default(uuid())
   date          DateTime
-  lawOffice            LawOffice @relation(fields: [IdOffice], references: [idLawOffice], onDelete: Cascade)
-  IdOffice String
-  isBooked             Boolean    @default(false)
-  createdAt            DateTime   @default(now())
-  customer             String     @default(uuid())
-  service              String
+  lawOffice     LawOffice @relation(fields: [IdOffice], references: [idLawOffice], onDelete: Cascade)
+  IdOffice      String
+  isBooked      Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  customer      User?      @relation(fields: [idCustomer], references: [idUser])
+  idCustomer    String?
+  service       String
+}
+
+model Comments {
+  idComment String    @id @default(uuid())
+  comment   String
+  LawOffice LawOffice @relation(fields: [idOffice], references: [idLawOffice], onDelete: Cascade)
+  idOffice  String
+  user      User?      @relation(fields: [idUser], references: [idUser])
+  idUser    String?
+}
+
+model User {
+  idUser       String         @id @default(uuid())
+  email        String         @unique
+  userName     String
+  password     String
+  Comments     Comments[]
+  Appointments Appointments[]
+  Ratings Ratings[]
 }

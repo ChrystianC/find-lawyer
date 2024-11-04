@@ -1,5 +1,5 @@
 
-import { getLocations, getSpecializations } from '../../Api';
+import { getLocations, getSpecializations } from '../../serverComponent';
 import { MyCombobox } from '../ui/combobox';
 import Temida from '../ui/images/Temida.png';
 import Image from 'next/image'
