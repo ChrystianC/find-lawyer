@@ -1,12 +1,13 @@
 'use client'
+import { getCookie } from "cookies-next";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 
-export default function BookApoiment({ date, book, isBooked, idAppointment, customer }) {
+export default function BookApoiment({ date, book, isBooked, idAppointment }) {
     const [booked, setBook] = useState(isBooked);
 
     useEffect(() => {
-        book(booked, idAppointment, customer, JSON.stringify(date))
+        book(booked, idAppointment, getCookie('user'), JSON.stringify(date))
     }, [booked])
 
     return <div className='text-center flex justify-center items-center group relative' >

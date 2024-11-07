@@ -1,33 +1,37 @@
-import { hash } from 'bcrypt';
-import { sign, compare } from 'jsonwebtoken';
-import { authenticate, ExpressReq } from './middlewares/auth';
+
 import { PrismaClient } from '@prisma/client';
 
 const cors = require( 'cors' );
 const express = require( 'express' );
 const app = express();
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient( {
+    datasources: {
+        db: {
+            url: "postgresql://postgres:Lola5652.@localhost:5432/Lawyler?schema=public"
+        }
+    }
+} );
 
-async function main ()
+app.use( express.json() );
+
+app.use( cors( {
+    origin: '*', // React app origin
+    credentials: true,
+} ) );
+
+app.listen( 3555, () =>
 {
-    await prisma.$connect();
+    console.info( 'Server running at http://localhost:3555' );
+} );
 
-    app.use( cors() );
-    app.use( express.json() );
 
-    app.use( cors( {
-        origin: 'http://localhost:3000', // React app origin
-        credentials: true,
-    } ) );
+app.get( '/', ( req, res ) =>
+{
+    res.send( 'Hello World!' );
+} );
 
-    app.listen( 3555, () =>
-    {
-        console.info( 'Server running at http://localhost:3555' );
-    } );
-}
-
-app.post( '/register', async ( req, res ) =>
+app.post( '/register/user', async ( req, res ) =>
 {
     try
     {
@@ -42,61 +46,60 @@ app.post( '/register', async ( req, res ) =>
     }
 } );
 
-app.post( '/login', async ( req, res ) =>
+app.post( '/register/office', async ( req, res ) =>
+{
+    try
+    {
+        const { city, lawOfficeName, email, password, address, officeSpecialization } = req.body;
+        const lawoffice = await prisma.lawOffice.create( {
+            data: { lawOfficeName: lawOfficeName, email: email, city: city, password: password, address: address, officeSpecialization: officeSpecialization }
+        } );
+        res.json( { token: lawoffice } );
+    } catch ( err )
+    {
+        res.json( { error: err } );
+    }
+} );
+
+app.post( '/login/user', async ( req, res ) =>
 {
     try
     {
         const user = await prisma.user.findUnique( {
             where: {
-                email: req.body.email
+                email: req.body.email,
+                password: req.body.password
             }
         } );
         if ( !user )
         {
             throw new Error( 'user not found' );
         }
-        const isPasswordCorrect = await compare( req.body.password, user.password );
-        if ( !isPasswordCorrect )
-        {
-            throw new Error( 'Password is incorrect' );
-        }
-
-        const { password: _password, ...userWithoutPassword } = user;
-        res.json( { userWithoutPassword, token: generateJwt( user ) } );
+        res.json( user.idUser );
     } catch ( err )
     {
-        res.json( { error: 'Email or passwrod are wrong!' } );
+        res.json( { error: err } );
     }
 
 } );
-
-// app.get( '/user', async ( req, res) =>
-// {
-//     res.send( 'Hello World users page!' );
-
-//     try
-//     {
-//         if ( !req.user )
-//         {
-//             return res.sendStatus( 401 );
-//         }
-//         const { password: _password, ...userWithoutPassword } = req.user;
-//         res.json( { userWithoutPassword, token: generateJwt( req.user ) } );
-
-//     } catch ( err )
-//     {
-//         next( err );
-//     }
-// } );
-
-
-main()
-    .catch( ( e ) =>
+app.post( '/login/office', async ( req, res ) =>
     {
-        console.error( e );
-        process.exit( 1 );
-    } )
-    .finally( async () =>
-    {
-        await prisma.$disconnect();
+        try
+        {
+            const office = await prisma.lawOffice.findUnique( {
+                where: {
+                    email: req.body.email,
+                    password: req.body.password
+                }
+            } );
+            if ( !office )
+            {
+                throw new Error( 'user not found' );
+            }
+            res.json( office.email);
+        } catch ( err )
+        {
+            res.json( { error: err } );
+        }
+    
     } );

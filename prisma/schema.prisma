@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url    = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 model Locations {
@@ -31,7 +31,8 @@ model LawOffice {
   profile              String?
   appointments         Appointments[]
   comments             Comments[]
-  email                String?         @unique
+  email                String?        @unique
+  password             String?
 }
 
 model Services {
@@ -47,7 +48,7 @@ model Ratings {
   rating    Int
   lawOffice LawOffice @relation(fields: [idOffice], references: [idLawOffice], onDelete: Cascade)
   idOffice  String
-  user      User?      @relation(fields: [idUser], references: [idUser])
+  user      User?     @relation(fields: [idUser], references: [idUser])
   idUser    String?
 }
 
@@ -58,7 +59,7 @@ model Appointments {
   IdOffice      String
   isBooked      Boolean   @default(false)
   createdAt     DateTime  @default(now())
-  customer      User?      @relation(fields: [idCustomer], references: [idUser])
+  customer      User?     @relation(fields: [idCustomer], references: [idUser])
   idCustomer    String?
   service       String
 }
@@ -68,8 +69,8 @@ model Comments {
   comment   String
   LawOffice LawOffice @relation(fields: [idOffice], references: [idLawOffice], onDelete: Cascade)
   idOffice  String
-  user      User?      @relation(fields: [idUser], references: [idUser])
-  idUser    String?
+  user      User    @relation(fields: [idUser], references: [idUser])
+  idUser    String
 }
 
 model User {
@@ -79,5 +80,5 @@ model User {
   password     String
   Comments     Comments[]
   Appointments Appointments[]
-  Ratings Ratings[]
+  Ratings      Ratings[]
 }

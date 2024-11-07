@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { setCookie } from 'cookies-next';
 
-export default function UserPage ()
+export default function OfficePage ()
 {
     const [ password, setPassword ] = useState( '' );
     const [ email, setEmail ] = useState( '' );
@@ -18,7 +18,7 @@ export default function UserPage ()
 
         try
         {
-            const response = await fetch( 'http://localhost:3555/login/user', {
+            const response = await fetch( 'http://localhost:3555/login/office', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ export default function UserPage ()
             } );
 
             const data = await response.json();
-            await setCookie('user', data, { maxAge: 60 * 60 });
+            await setCookie('office', data, { maxAge: 60 * 60 });
             await setCookie('auth', data, { maxAge: 60 * 60 });
 
         } catch ( e )
@@ -41,14 +41,14 @@ export default function UserPage ()
     return ( <>
         <Navbar></Navbar>
         <div className="container px-5 py-24 mx-auto border border-gray-200 m-5">
-            <div className="text-center mb-12"><h1 className="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4">Great to see you! Log in to quickly and conveniently schedule an appointment with our lawyer.
+            <div className="text-center mb-12"><h1 className="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4">Great to see you! Log in to quickly and conveniently organise your law office appoiments.
 
 
 
 
 
 
-</h1><p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500s">Log in to conveniently schedule your legal appointments online and share your feedback about laws offices.</p><div className="flex mt-6 justify-center"><div className="w-24 h-1 rounded-full bg-gray-900 inline-flex"></div></div></div>
+</h1><p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500s">Log in to improving the process of booking legal services and increasing the number of clients through access to other clients' reviews.</p><div className="flex mt-6 justify-center"><div className="w-24 h-1 rounded-full bg-gray-900 inline-flex"></div></div></div>
             <form onSubmit={ handleSubmit } >
                 <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
 
@@ -88,7 +88,7 @@ const Navbar = () =>
                 <span className='lg:border-l lg:border-gray-700 lg:pl-6 lg:py-7'>
                 </span>
                 <div>
-                    <Link className='border-5 border-transparent inline-block hover:border-gray-700 text-gray-500 font-semibold hover:text-white py-2 px-4 border rounded' href={ '/components/login/user/register' }>Register User</Link>
+                    <Link className='border-5 border-transparent inline-block hover:border-gray-700 text-gray-500 font-semibold hover:text-white py-2 px-4 border rounded' href={ '/components/login/office/register' }>Register office</Link>
                 </div>
             </div>
         </header>

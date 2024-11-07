@@ -3,9 +3,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import libra from '../../../ui/images/libra.png';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function UserPage ()
 {
+    const router = useRouter();
+
     const [ password, setPassword ] = useState( '' );
     const [ email, setEmail ] = useState( '' );
     const [ userName, setUserName ] = useState( '' );
@@ -16,7 +19,7 @@ export default function UserPage ()
 
         try
         {
-            const response = await fetch( 'http://localhost:3555/register', {
+            const response = await fetch( 'http://localhost:3555/register/user', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -26,65 +29,75 @@ export default function UserPage ()
 
             const data = await response.json();
 
-            console.log(data)
+            console.log( data );
         } catch ( e )
         {
             console.log( e );
         }
+        router.replace( '/components/login/user' );
     };
     return ( <>
         <Navbar></Navbar>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={ handleSubmit }>
 
-        <div className="container px-5 py-24 mx-auto">
-            <div className="flex items-center lg:w-3/5 mx-auto border-b pb-10 mb-10 border-gray-200 sm:flex-row flex-col">
-                <div className="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="sm:w-16 sm:h-16 w-10 h-10" viewBox="0 0 24 24">
-                    </svg>
+            <div className="container px-5 py-24 mx-auto ">
+                <div className='flex items-center lg:w-3/5 mx-auto border-b pb-10 mb-10 border-gray-200 sm:flex-row flex-col text-gray-900 text-xl title-font font-medium mb-2"'>
 
+                    Register in our service, and make your life way easier
                 </div>
-                <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-                    <h2 className="text-gray-900 text-lg title-font font-medium mb-2">Share you Email with us</h2>
-                    <div className="relative flex-grow w-full">
-                        <input type="email" name="email"
-                            value={ email }
-                            onChange={ ( e ) => setEmail( e.target.value ) }
-                            required className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                <div className="flex items-center lg:w-3/5 mx-auto border-b pb-10 mb-10 border-gray-200 sm:flex-row flex-col">
+                    <div className="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center rounded-full bg-gray-800 text-white flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="size-14">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                        </svg>
+
+
+                    </div>
+                    <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
+                        <h2 className="text-gray-900 text-lg title-font font-medium mb-2">Share you Email with us</h2>
+                        <div className="relative flex-grow w-full">
+                            <input type="email" name="email"
+                                value={ email }
+                                onChange={ ( e ) => setEmail( e.target.value ) }
+                                required className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="flex items-center lg:w-3/5 mx-auto border-b pb-10 mb-10 border-gray-200 sm:flex-row flex-col">
-                <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-                    <h2 className="text-gray-900 text-lg title-font font-medium mb-2">The user name of yours</h2>
-                    <div className="relative flex-grow w-full">
-                        <input type="text" name="userName"
-                          value={ userName }
-                          onChange={ ( e ) => setUserName( e.target.value ) }
-                          required className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                <div className="flex items-center lg:w-3/5 mx-auto border-b pb-10 mb-10 border-gray-200 sm:flex-row flex-col">
+                    <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
+                        <h2 className="text-gray-900 text-lg title-font font-medium mb-2">The user name of yours</h2>
+                        <div className="relative flex-grow w-full">
+                            <input type="text" name="userName"
+                                value={ userName }
+                                onChange={ ( e ) => setUserName( e.target.value ) }
+                                required className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        </div>
                     </div>
-                </div>
-                <div className="sm:w-32 sm:order-none order-first sm:h-32 h-20 w-20 sm:ml-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="sm:w-16 sm:h-16 w-10 h-10" viewBox="0 0 24 24">
+                    <div className="sm:w-32 sm:order-none order-first sm:h-32 h-20 w-20 sm:ml-10 inline-flex items-center justify-center rounded-full bg-gray-800 text-white flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-14">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
 
-                    </svg>
-                </div>
-            </div>
-            <div className="flex items-center lg:w-3/5 mx-auto sm:flex-row flex-col">
-                <div className="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="sm:w-16 sm:h-16 w-10 h-10" viewBox="0 0 24 24">
-                    </svg>
-                </div>
-                <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-                    <h2 className="text-gray-900 text-lg title-font font-medium mb-2">And the most importat your own password</h2>
-                    <div className="relative flex-grow w-full">
-                        <input type="text" name="password"                  value={ password }
-                            onChange={ ( e ) => setPassword( e.target.value ) }
-                            required className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                     </div>
                 </div>
-            </div>
-            <button type='submit' className="flex mx-auto mt-20 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Sing up</button></div>
-    </form>
+                <div className="flex items-center lg:w-3/5 mx-auto sm:flex-row flex-col">
+                    <div className="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center rounded-full bg-gray-800 text-white flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-14">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                        </svg>
+
+                    </div>
+                    <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
+                        <h2 className="text-gray-900 text-lg title-font font-medium mb-2">And the most importat your own password</h2>
+                        <div className="relative flex-grow w-full">
+                            <input type="text" name="password" value={ password }
+                                onChange={ ( e ) => setPassword( e.target.value ) }
+                                required className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        </div>
+                    </div>
+                </div>
+                <button type='submit' className="flex mx-auto mt-20 text-white bg-gray-700 border-0 py-2 px-8 focus:outline-none hover:bg-gray-900 rounded text-lg">Sing up</button></div>
+        </form>
     </> );
 }
 
@@ -98,15 +111,12 @@ const Navbar = () =>
                     <span className='ml-3 text-xl text-white'>Lawyler</span>
                 </a>
                 <nav className='md:ml-auto flex-wrap items-center text-base justify-center hidden lg:block'>
-                    {/* <NavLink text='Advices' />
-                    <NavLink text='Second Link' />
-                    <NavLink text='Third Link' />
-                    <NavLink text='Fourth Link' /> */}
+    
                 </nav>
                 <span className='lg:border-l lg:border-gray-700 lg:pl-6 lg:py-7'>
                 </span>
                 <div>
-                    <button className='border-5 border-transparent inline-block hover:border-gray-700 text-gray-500 font-semibold hover:text-white py-2 px-4 border rounded'>Login User</button>
+                <Link className='border-5 border-transparent inline-block hover:border-gray-700 text-gray-500 font-semibold hover:text-white py-2 px-4 border rounded' href={ '/components/login/user' }>Login User</Link>  
                     <button className='border-5 border-transparent inline-block hover:border-gray-700 text-gray-500 font-semibold hover:text-white py-2 px-4 border rounded'>Login Kancelaria</button>
                 </div>
             </div>

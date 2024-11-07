@@ -233,7 +233,7 @@ export function MyCombobox(props: { mapLocation: Locations[], mapSpecialization:
                 </Combobox>
             </div>
             <div >
-                <button className='flex justify-center items-center h-9 w-32 border-5 border-gray-600 text-gray-200 font-semibold hover:bg-blue-700 py-2 px-4 border rounded hover:border-blue-900 disabled:hover:border-red-900 disabled:hover:bg-red-500 bg-blue-500' disabled={disabled} onClick={() => { return router.replace(`/components/cards?${createQueryString('idSpecialization', selectedSpecialization.idSpecialization)}/${createQueryString('idLocation', selectedLocation.idLocation)}`), undefined, { shallow: true } }}>Search</button>
+                <button className='flex justify-center items-center h-9 w-32 border-5 border-gray-800 text-gray-200 font-semibold hover:bg-indigo-700 py-2 px-4 border rounded hover:border-blue-900 disabled:hover:border-rose-900  disabled:hover:bg-rose-800 bg-indigo-800' disabled={disabled} onClick={() => { return router.replace(`/components/cards?${createQueryString('idSpecialization', selectedSpecialization.idSpecialization)}/${createQueryString('idLocation', selectedLocation.idLocation)}`), undefined, { shallow: true } }}>Search</button>
             </div >
         </>
     )
