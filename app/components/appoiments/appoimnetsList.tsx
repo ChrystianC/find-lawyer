@@ -3,8 +3,9 @@ import { prisma } from "../../../prisma/db";
 import BookApoiment from "./bookApoiment";
 import emailjs from '@emailjs/browser';
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default async function AppoimentsList ( { appoiments, idOffice } )
+export default async function AppoimentsList ( { appoiments, idOffice , rerender} )
 {
     const cookieStore = cookies();
 
@@ -18,8 +19,8 @@ export default async function AppoimentsList ( { appoiments, idOffice } )
 
         emailjs.send( "service_qa8f09c", "template_yaw3w9n", {
             date: date,
-            customer: "chrystianchwaja2001@gmail.com",
-            reply_to: "chrystianchwaja2001@gmail.com",
+            customer: user.email,
+            reply_to: user.email,
         } , {publicKey: '7e5a-NxHjAQ85DVUD'});
 
         await prisma.appointments.update( {
@@ -34,10 +35,11 @@ export default async function AppoimentsList ( { appoiments, idOffice } )
             }
         },
         );
+        redirect(rerender)
     };
     const renderAppoments = await appoiments.map( ( { idAppointment, date, isBooked, service } ) =>
         <div className="border-b pb-4 border-gray-400 border-dashed" key={ idAppointment.toString() }>
-            <p className="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">Meeting { service }</p>
+            <p className="text-xs text-center font-light leading-3 text-gray-500 dark:text-gray-300">Meeting</p>
             <BookApoiment date={ date } book={ book } isBooked={ isBooked } idAppointment={ idAppointment }/>
         </div>
 

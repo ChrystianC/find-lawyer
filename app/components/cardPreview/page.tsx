@@ -7,6 +7,8 @@ import EditForm from "./edit/edit";
 import dayjs from "dayjs";
 import { getComments, getLawOffice, getLocations, getService, getSpecializations } from "../../serverComponent/getFromApi";
 import { User } from "@prisma/client";
+import { redirect } from 'next/navigation';
+
 
 export default async function CardPreview ()
 {
@@ -17,9 +19,24 @@ export default async function CardPreview ()
     const specializations = await getSpecializations();
     const cookieStore = cookies();
     const idUser = cookieStore.get( 'user' )?.value;
-    const user = await prisma.user.findFirst( { where: { idUser: { equals: idUser } } } );
+    const user = idUser ? await prisma.user.findFirst( { where: { idUser: { equals: idUser } } } ) : undefined;
     const service = await getService( requestUrl );
-    console.log( service );
+    const isNotOffice = cookieStore.get( 'office' )?.value === undefined;
+
+    const appoiments = await prisma.appointments.findMany( { where: { IdOffice: lawOffice.idLawOffice } } );
+    const renderAppoments = appoiments.map( async ( { date, createdAt, service, idCustomer } ) =>
+    {
+        const customer = idCustomer ? await prisma.user.findFirst( { where: { idUser: idCustomer } } ) : undefined;
+
+        return ( <div className=" bg-gray-100 bg-opacity-75 px-8 pt-6 pb-6 rounded-lg overflow-hidden text-center relative m-5">
+            <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">Appoiment</h2>
+            <h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">{ service }</h1>
+            <span className="text-indigo-500 inline-flex items-center">Date: { date.toDateString() } { date.toLocaleTimeString() }</span>
+            <p className="leading-relaxed mb-3">Created by: { customer?.email } { createdAt.toDateString() }</p>
+
+        </div> );
+
+    } );
     const deleteLawOffice = async () =>
     {
         'use server';
@@ -40,6 +57,7 @@ export default async function CardPreview ()
                 idUser: user.idUser
             }
         } );
+        redirect( `/components/cardPreview?${ lawOffice.idLawOffice }` );
     };
     const addAppoiment = async ( date: Date ) =>
     {
@@ -62,7 +80,7 @@ export default async function CardPreview ()
             },
         } );
     };
-    const editCard = async ( city: string, address: string, lawOfficeName: string, officeSpecialization: string, profile: string) =>
+    const editCard = async ( city: string, address: string, lawOfficeName: string, officeSpecialization: string, profile: string ) =>
     {
         'use server';
         if ( city === lawOffice.city && address === lawOffice.address && lawOfficeName === lawOffice.lawOfficeName && officeSpecialization === lawOffice.officeSpecialization && profile === lawOffice.profile ) return;
@@ -79,12 +97,12 @@ export default async function CardPreview ()
                 profile: profile,
             }
         } );
-    
+
     };
 
     return <div className="bg-slate-50">
         <NavbarPage />
-        <div className="container px-5 py-24 mx-auto">
+        <div className="container px-5 py-16 mx-auto">
             <div className="flex flex-wrap w-full mb-20 flex-col items-center text-center">
                 {
                     ( lawOffice.profile ) ?
@@ -98,14 +116,24 @@ export default async function CardPreview ()
                     Enhance Your Law Office Efficiency and Accuracy: Discover Superior Document Editing Solutions for Legal Professionals
                 </p>
             </div>
-            <EditForm edit={ editCard } lawOffice={ lawOffice } deleteLawOffice={ deleteLawOffice } newAppoiment={ addAppoiment } mapLocation={ locations } mapSpecialization={ specializations } service={ service } />
+            <EditForm edit={ editCard } lawOffice={ lawOffice } deleteLawOffice={ deleteLawOffice } newAppoiment={ addAppoiment } mapLocation={ locations } mapSpecialization={ specializations } service={ service } isNotOffice={ isNotOffice } />
+            <div className="flex flex-wrap w-full mb-20 flex-col items-center text-center mt-5">
+                <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Appoiments Section</h1>
+                <p className="lg:w-1/2 w-full leading-relaxed text-gray-500">
+                    Schedule your appoiments to everyone see you are mob by cilents
+                </p>
+            </div>
+            <div className="flex flex-wrap justify-center">
+
+                { renderAppoments }
+            </div>
             <div className="flex flex-wrap w-full mb-20 flex-col items-center text-center mt-5">
                 <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Comments Section</h1>
                 <p className="lg:w-1/2 w-full leading-relaxed text-gray-500">
                     Join the Conversation: Share Your Thoughts, Insights, and Experiences with Our Community
                 </p>
             </div>
-            <div className="flex flex-wrap -m-4">
+            <div className="flex flex-wrap m-4">
                 <div className="xl:w-1/3 md:w-1/2 p-4">
                     <div className="border border-gray-200 p-6 rounded ">
                         <div className="w-10 h-10 flex justify-center items-center rounded-full bg-gray-700  mb-4">
@@ -117,8 +145,10 @@ export default async function CardPreview ()
                         <AddComment create={ addComment } user={ user } />
                     </div>
                 </div>
-                <FeedBack comments={ comments } />
+                <FeedBack comments={ comments } lawofficeId={ lawOffice.idLawOffice } />
             </div>
+
         </div>
+
     </div>;
 }

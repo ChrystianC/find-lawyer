@@ -52,7 +52,7 @@ export default async function LawOfficeCardsPage ()
                             } } />
                             <div className="pt-2 md:px-16 px-5 dark:bg-gray-700 bg-gray-50 rounded-b">
                                 <div className="px-4">
-                                    <AppoimentsList appoiments={ apoimentsArray } idOffice={ idLawOffice } />
+                                    <AppoimentsList appoiments={ apoimentsArray } idOffice={ idLawOffice } rerender={headers().get( 'x-url' )}/>
                                 </div>
                             </div>
                         </div>

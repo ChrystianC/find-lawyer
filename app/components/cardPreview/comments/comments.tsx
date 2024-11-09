@@ -1,8 +1,9 @@
 import { cookies } from "next/headers";
 import { prisma } from "../../../../prisma/db";
 import DeleteComment from "./deleteComment";
+import { redirect } from "next/navigation";
 
-export default async function FeedBack ( { comments } )
+export default async function FeedBack ( { comments, lawofficeId } )
 {
     const cookieStore = cookies();
     const idUser = cookieStore.get( 'user' )?.value;
@@ -17,6 +18,8 @@ export default async function FeedBack ( { comments } )
                     idComment
             }
         } );
+        redirect(`/components/cardPreview?${lawofficeId}`)
+
     };
     const renderComments = comments.map( async ( { comment, user, idComment } ) =>
     {

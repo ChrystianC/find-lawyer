@@ -6,7 +6,7 @@ import { Combobox, Transition } from '@headlessui/react';
 import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { getCookie } from "cookies-next";
 
-export default function EditForm ( { edit, lawOffice, deleteLawOffice, newAppoiment, mapLocation, mapSpecialization, service } )
+export default function EditForm ( { edit, lawOffice, deleteLawOffice, newAppoiment, mapLocation, mapSpecialization, service, isNotOffice } )
 {
     const [ city, setCity ] = useState( lawOffice.city ?? undefined );
     const [ queryCity, setQueryCity ] = useState( '' );
@@ -15,7 +15,6 @@ export default function EditForm ( { edit, lawOffice, deleteLawOffice, newAppoim
     const [ officeSpecialization, setOfficeSpecialization ] = useState( lawOffice.officeSpecialization ?? undefined );
     const [ queryOfficeSpecialization, setQueryOfficeSpecialization ] = useState( '' );
     const [ profile, setProfile ] = useState( lawOffice.profile ?? undefined );
-    const isNotOffice = getCookie( 'office' ) === undefined;
    
     const options = ( query: string, mapOptions: any ) =>
     {

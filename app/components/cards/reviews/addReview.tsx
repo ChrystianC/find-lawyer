@@ -3,7 +3,6 @@ import { useState } from 'react'
 
 export default function AddReview({ create, office, isDisabled }) {
     const [rating, setRating] = useState(null);
-    console.log(isDisabled)
     return (
         < >
             <input type='checkbox' id={`star-${office}-1`} value='1' className='hidden peer' disabled={isDisabled} onChange={async (e) => { setRating(e.target.value); await create(1, office) }}></input>
