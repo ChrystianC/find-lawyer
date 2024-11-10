@@ -1,11 +1,8 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from "@prisma/client";
 
-declare global
-{
-  namespace NodeJS
-  {
-    interface Global
-    {
+declare global {
+  namespace NodeJS {
+    interface Global {
       prisma: PrismaClient;
     }
   }
@@ -13,15 +10,11 @@ declare global
 
 let prisma: PrismaClient;
 
-if ( typeof window === 'undefined' )
-{
-  if ( process.env.NODE_ENV === 'production' )
-  {
+if (typeof window === "undefined") {
+  if (process.env.NODE_ENV === "production") {
     prisma = new PrismaClient();
-  } else
-  {
-    if ( !global.prisma )
-    {
+  } else {
+    if (!global.prisma) {
       global.prisma = new PrismaClient();
     }
 

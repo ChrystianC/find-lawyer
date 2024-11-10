@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.custom-slider::-webkit-scrollbar
-{
-    display: none;
+.custom-slider::-webkit-scrollbar {
+  display: none;
 }
