@@ -212,68 +212,68 @@ export default function RegisterPage ( { mapCity, mapSpecialization } )
                     <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
                         <h2 className="text-gray-900 text-lg title-font font-medium mb-2">In which industry will you specialize?</h2>
                         <div className="relative flex-grow w-full">
-                        <Combobox value={officeSpecialization} onChange={setOfficeSpecialization}>
-                    <div className='relative mt-1'>
-                        <div className='relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md sm:text-sm'>
-                            <Combobox.Input
-                                className='w-full bg-gray-100 rounded border bg-opacity-50 border-gray-300 focus:ring-2 focus:ring-indigo-200 focus:bg-transparent focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
-                                displayValue={(option: any) => option?.specialization}
-                                onChange={(event) => setQueryOfficeSpecialization(event.target.value)}
-                                value={officeSpecialization}
-                            />
-                            <Combobox.Button className='absolute inset-y-0 right-0 flex items-center pr-2'>
-                                <ChevronUpDownIcon
-                                    className='h-5 w-5 text-gray-400'
-                                    aria-hidden='true'
-                                />
-                            </Combobox.Button>
-                        </div>
-                        <Transition
-                            leave='transition ease-in duration-100'
-                            leaveFrom='opacity-100'
-                            leaveTo='opacity-0'
-                            afterLeave={() => setQueryOfficeSpecialization('')}
-                        >
-                            <Combobox.Options className='absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-gray-900 py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm'>
-                                {officeSpecializationOptions.length === 0 && officeSpecializationOptions !== '' ? (
-                                    <div className='relative cursor-default select-none px-4 py-2 text-red-500'>
-                                        Nothing found.
+                            <Combobox value={ officeSpecialization } onChange={ setOfficeSpecialization }>
+                                <div className='relative mt-1'>
+                                    <div className='relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md sm:text-sm'>
+                                        <Combobox.Input
+                                            className='w-full bg-gray-100 rounded border bg-opacity-50 border-gray-300 focus:ring-2 focus:ring-indigo-200 focus:bg-transparent focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
+                                            displayValue={ ( option: any ) => option?.specialization }
+                                            onChange={ ( event ) => setQueryOfficeSpecialization( event.target.value ) }
+                                            value={ officeSpecialization }
+                                        />
+                                        <Combobox.Button className='absolute inset-y-0 right-0 flex items-center pr-2'>
+                                            <ChevronUpDownIcon
+                                                className='h-5 w-5 text-gray-400'
+                                                aria-hidden='true'
+                                            />
+                                        </Combobox.Button>
                                     </div>
-                                ) : (
-                                    officeSpecializationOptions.map((option) => (
-                                        <Combobox.Option
-                                            key={option.idSpecialization}
-                                            className={({ active }) =>
-                                                `relative cursor-pointer select-none py-2 pl-10 pr-4 ${active ? 'bg-gray-900 text-white' : 'text-white-900'
-                                                }`
-                                            }
-                                            value={option.specialization}
-                                        >
-                                            {({ selected, active }) => (
-                                                <>
-                                                    <span
-                                                        className={`block truncate ${selected ? 'font-medium' : 'font-normal'
-                                                            }`}
+                                    <Transition
+                                        leave='transition ease-in duration-100'
+                                        leaveFrom='opacity-100'
+                                        leaveTo='opacity-0'
+                                        afterLeave={ () => setQueryOfficeSpecialization( '' ) }
+                                    >
+                                        <Combobox.Options className='absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-gray-900 py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm'>
+                                            { officeSpecializationOptions.length === 0 && officeSpecializationOptions !== '' ? (
+                                                <div className='relative cursor-default select-none px-4 py-2 text-red-500'>
+                                                    Nothing found.
+                                                </div>
+                                            ) : (
+                                                officeSpecializationOptions.map( ( option ) => (
+                                                    <Combobox.Option
+                                                        key={ option.idSpecialization }
+                                                        className={ ( { active } ) =>
+                                                            `relative cursor-pointer select-none py-2 pl-10 pr-4 ${ active ? 'bg-gray-900 text-white' : 'text-white-900'
+                                                            }`
+                                                        }
+                                                        value={ option.specialization }
                                                     >
-                                                        {option.specialization}
-                                                    </span>
-                                                    {selected ? (
-                                                        <span
-                                                            className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active ? 'text-white' : 'text-gray-600'
-                                                                }`}
-                                                        >
-                                                        </span>
-                                                    ) : null}
-                                                </>
-                                            )}
-                                        </Combobox.Option>
-                                    ))
+                                                        { ( { selected, active } ) => (
+                                                            <>
+                                                                <span
+                                                                    className={ `block truncate ${ selected ? 'font-medium' : 'font-normal'
+                                                                        }` }
+                                                                >
+                                                                    { option.specialization }
+                                                                </span>
+                                                                { selected ? (
+                                                                    <span
+                                                                        className={ `absolute inset-y-0 left-0 flex items-center pl-3 ${ active ? 'text-white' : 'text-gray-600'
+                                                                            }` }
+                                                                    >
+                                                                    </span>
+                                                                ) : null }
+                                                            </>
+                                                        ) }
+                                                    </Combobox.Option>
+                                                ) )
 
-                                )}
-                            </Combobox.Options>
-                        </Transition>
-                    </div>
-                </Combobox>
+                                            ) }
+                                        </Combobox.Options>
+                                    </Transition>
+                                </div>
+                            </Combobox>
                         </div>
                     </div>
                     <div className="sm:w-32 sm:order-none order-first sm:h-32 h-20 w-20 sm:ml-10 inline-flex items-center justify-center rounded-full bg-gray-800 text-white flex-shrink-0">
@@ -303,8 +303,7 @@ const Navbar = () =>
                 <span className='lg:border-l lg:border-gray-700 lg:pl-6 lg:py-7'>
                 </span>
                 <div>
-                    <Link className='border-5 border-transparent inline-block hover:border-gray-700 text-gray-500 font-semibold hover:text-white py-2 px-4 border rounded' href={ '/components/login/user' }>Login User</Link>
-                    <button className='border-5 border-transparent inline-block hover:border-gray-700 text-gray-500 font-semibold hover:text-white py-2 px-4 border rounded'>Login Kancelaria</button>
+                    <Link className='border-5 border-transparent inline-block hover:border-gray-700 text-gray-500 font-semibold hover:text-white py-2 px-4 border rounded' href={ '/components/login/office' }>Login Kancelaria</Link>
                 </div>
             </div>
         </header>

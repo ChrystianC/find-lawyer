@@ -27,28 +27,23 @@ export default function UserPage ()
             } );
 
             const data = await response.json();
-            await setCookie('user', data, { maxAge: 60 * 60 });
-            await setCookie('auth', data, { maxAge: 60 * 60 });
+            await setCookie( 'user', data, { maxAge: 60 * 60 } );
+            await setCookie( 'auth', data, { maxAge: 60 * 60 } );
 
         } catch ( e )
         {
             console.log( e );
         }
 
-        router.replace('/')
+        router.replace( '/' );
+        router.refresh();
     };
 
     return ( <>
         <Navbar></Navbar>
         <div className="container px-5 py-24 mx-auto border border-gray-200 m-5">
             <div className="text-center mb-12"><h1 className="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4">Great to see you! Log in to quickly and conveniently schedule an appointment with our lawyer.
-
-
-
-
-
-
-</h1><p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500s">Log in to conveniently schedule your legal appointments online and share your feedback about laws offices.</p><div className="flex mt-6 justify-center"><div className="w-24 h-1 rounded-full bg-gray-900 inline-flex"></div></div></div>
+            </h1><p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500s">Log in to conveniently schedule your legal appointments online and share your feedback about laws offices.</p><div className="flex mt-6 justify-center"><div className="w-24 h-1 rounded-full bg-gray-900 inline-flex"></div></div></div>
             <form onSubmit={ handleSubmit } >
                 <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
 

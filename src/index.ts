@@ -132,9 +132,9 @@ app.post( '/user/preview', async ( req, res ) =>
                 idUser: req.body.userId
             },
             data: {
-             email: req.body.email,
-             password: req.body.password,
-             userName: req.body.userName
+                email: req.body.email,
+                password: req.body.password,
+                userName: req.body.userName
             }
         } );
         res.json( req.body.userId );
@@ -142,5 +142,5 @@ app.post( '/user/preview', async ( req, res ) =>
     {
         res.json( { error: err } );
     }
-  
+
 } );

@@ -5,10 +5,10 @@ import FeedBack from "./comments/comments";
 import AddComment from "./comments/AddComments";
 import EditForm from "./edit/edit";
 import dayjs from "dayjs";
-import { getComments, getLawOffice, getLocations, getService, getSpecializations } from "../../serverComponent/getFromApi";
+import { getComments, getLawOffice, getLocations, getSpecializations } from "../../serverComponent/index";
 import { User } from "@prisma/client";
 import { redirect } from 'next/navigation';
-
+import Logout from './logout/logout';
 
 export default async function CardPreview ()
 {
@@ -20,7 +20,6 @@ export default async function CardPreview ()
     const cookieStore = cookies();
     const idUser = cookieStore.get( 'user' )?.value;
     const user = idUser ? await prisma.user.findFirst( { where: { idUser: { equals: idUser } } } ) : undefined;
-    const service = await getService( requestUrl );
     const isNotOffice = cookieStore.get( 'office' )?.value === undefined;
 
     const appoiments = await prisma.appointments.findMany( { where: { IdOffice: lawOffice.idLawOffice } } );
@@ -101,7 +100,7 @@ export default async function CardPreview ()
     };
 
     return <div className="bg-slate-50">
-        <NavbarPage />
+        { !cookieStore.get( 'office' )?.name ? <NavbarPage /> : <Logout officeCookie={ cookieStore.get( 'office' ) } authCookie={ cookieStore.get( 'auth' ) } /> }
         <div className="container px-5 py-16 mx-auto">
             <div className="flex flex-wrap w-full mb-20 flex-col items-center text-center">
                 {
@@ -111,12 +110,13 @@ export default async function CardPreview ()
                         <span className={ `w-60 h-60  rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400 text-5xl` }>?</span>
 
                 }
-                <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900 mt-2">Law Office Editor Page</h1>
+                <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900 mt-2">Law Office Editor Page
+                </h1>
                 <p className="lg:w-1/2 w-full leading-relaxed text-gray-500">
                     Enhance Your Law Office Efficiency and Accuracy: Discover Superior Document Editing Solutions for Legal Professionals
                 </p>
             </div>
-            <EditForm edit={ editCard } lawOffice={ lawOffice } deleteLawOffice={ deleteLawOffice } newAppoiment={ addAppoiment } mapLocation={ locations } mapSpecialization={ specializations } service={ service } isNotOffice={ isNotOffice } />
+            <EditForm edit={ editCard } lawOffice={ lawOffice } deleteLawOffice={ deleteLawOffice } newAppoiment={ addAppoiment } mapLocation={ locations } mapSpecialization={ specializations } isNotOffice={ isNotOffice } />
             <div className="flex flex-wrap w-full mb-20 flex-col items-center text-center mt-5">
                 <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Appoiments Section</h1>
                 <p className="lg:w-1/2 w-full leading-relaxed text-gray-500">
@@ -147,8 +147,6 @@ export default async function CardPreview ()
                 </div>
                 <FeedBack comments={ comments } lawofficeId={ lawOffice.idLawOffice } />
             </div>
-
         </div>
-
     </div>;
 }

@@ -1,24 +1,11 @@
 
-import { prisma } from '../../../prisma/db';
 import { getLocations, getSpecializations } from '../../serverComponent';
 import { MyCombobox } from '../ui/combobox';
 import Temida from '../ui/images/Temida.png';
 import Image from 'next/image';
+
 export async function SearchPage ()
 {
-    //     await prisma.lawOffice.create({
-    //     data:
-    //     {
-    //         lawOfficeName: 'Law office 3',
-    //         ratings: { create: { rating: 5 }},
-    //         officeSpecialization: 'Taxes',
-    //         city: 'Cracow',
-    //         address: 'ul. Kąkolowa 15',
-    //         profile: 'https://images.pexels.com/photos/26201367/pexels-photo-26201367/free-photo-of-miasto-znane-miejsce-budynek-most.jpeg?auto=compress&cs=tinysrgb&w=600',
-    //         services: {create: {serviceName: 'Service Name', servicePrice: 'Service Price'}}
-    //     }
-    // },
-    // );
     const [ specializations, locations ] = await Promise.all( [ getSpecializations(), getLocations() ] );
 
     return <section className='text-gray-600 bg-gray-900'>

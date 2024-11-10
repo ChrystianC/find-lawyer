@@ -15,22 +15,9 @@ import { prisma } from '../../../prisma/db';
 export default async function LawOfficeCardsPage ()
 {
     const cookieStore = cookies();
-    const auth = await cookieStore.get( 'auth' );
-    const office =  cookieStore.get('office');
-    const emailOffice = office ? await prisma.lawOffice.findUnique({where: { email: office?.value}}): undefined
-    // await prisma.lawOffice.create({
-    //     data:
-    //     {
-    //         lawOfficeName: 'Law office 3',
-    //         ratings: { create: { rating: 5 }},
-    //         officeSpecialization: 'Podatki',
-    //         city: 'Kraków',
-    //         address: 'ul. Kąkolowa 15',
-    //         profile: 'https://images.pexels.com/photos/26201367/pexels-photo-26201367/free-photo-of-miasto-znane-miejsce-budynek-most.jpeg?auto=compress&cs=tinysrgb&w=600',
-    //         services: {create: {serviceName: 'Service Name', servicePrice: 'Service Price'}}
-    //     }
-    // },
-    // );
+    const auth = cookieStore.get( 'auth' );
+    const office = cookieStore.get( 'office' );
+    const emailOffice = office ? await prisma.lawOffice.findUnique( { where: { email: office?.value } } ) : undefined;
     const requestUrl = headers().get( 'x-url' ).split( '?' )[ 1 ].split( '%2F' );
     const [ singleSpecialization, singleLocation ] = await Promise.all( [ getSpecializationFromParam( requestUrl[ 0 ] ), getLocationFromParam( requestUrl[ 1 ] ) ] );
     const [ specializations, locations ] = await Promise.all( [ getSpecializations(), getLocations() ] );
@@ -52,7 +39,7 @@ export default async function LawOfficeCardsPage ()
                             } } />
                             <div className="pt-2 md:px-16 px-5 dark:bg-gray-700 bg-gray-50 rounded-b">
                                 <div className="px-4">
-                                    <AppoimentsList appoiments={ apoimentsArray } idOffice={ idLawOffice } rerender={headers().get( 'x-url' )}/>
+                                    <AppoimentsList appoiments={ apoimentsArray } idOffice={ idLawOffice } rerender={ headers().get( 'x-url' ) } />
                                 </div>
                             </div>
                         </div>
@@ -70,17 +57,17 @@ export default async function LawOfficeCardsPage ()
                         }
                         <div className='flex flex-col ml-2'>
                             <h2 className='text-sm title-font text-gray-500 tracking-widest'>Law office name</h2>
-                            <h1 className='text-gray-900 text-3xl title-font font-medium mb-1 hover:text-indigo-500'>{ auth ?? email === emailOffice?.email  ? <Link href={ `/components/cardPreview?${ idLawOffice }` }>{ lawOfficeName }</Link>: <span>{ lawOfficeName }</span> }</h1>
+                            <h1 className='text-gray-900 text-3xl title-font font-medium mb-1 hover:text-indigo-500'>{ auth ?? email === emailOffice?.email ? <Link href={ `/components/cardPreview?${ idLawOffice }` }>{ lawOfficeName }</Link> : <span>{ lawOfficeName }</span> }</h1>
                         </div>
                     </div>
                     <div className='mb-5 text-sm items-center flex mt-0'>
-                        <Reviews ratings={ rating } idLawOffice={idLawOffice} />
+                        <Reviews ratings={ rating } idLawOffice={ idLawOffice } />
                         <span className='ml-2 pl-2 py-2 border-l-2 border-gray-200 space-x-2s'>
                             <a href={ `https://www.google.com/maps/search/?api=1&query=${ city }%20${ address }` }>{ address }, { city }</a>
                         </span>
                     </div>
                     <div className='leading-relaxed'>
-                        <Wares services={ service } officeSpecialization={officeSpecialization}/>
+                        <Wares services={ service } officeSpecialization={ officeSpecialization } />
                     </div>
                     <div className='border-t-2 mt-1 pt-2 title-font'>The law office specializating in { officeSpecialization }</div>
                 </div>
@@ -95,7 +82,7 @@ export default async function LawOfficeCardsPage ()
             <div className='container flex-col lg:flex-row flex flex-grow sm:w-3/4 sm:space-x-4 sm:space-y-0 space-y-4 p-10 lg:items-center'>
                 <div className='flex items-center justify-center lg:justify-stretch'>
                     <Image src={ libra } alt='libra' width={ 64 } height={ 64 } priority={ false } className='rounded-full' />
-                        <a className='ml-3 text-xl text-white lg:text-gray-800' href={ '/' }>Lawyler</a>
+                    <a className='ml-3 text-xl text-white lg:text-gray-800' href={ '/' }>Lawyler</a>
                 </div>
                 <MyCombobox mapLocation={ locations } mapSpecialization={ specializations } choosenLocation={ singleLocation } choosenSpecialization={ singleSpecialization } />
                 { auth !== undefined ? <div className='absolute right-16 text-gray-200'>

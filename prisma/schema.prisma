@@ -69,7 +69,7 @@ model Comments {
   comment   String
   LawOffice LawOffice @relation(fields: [idOffice], references: [idLawOffice], onDelete: Cascade)
   idOffice  String
-  user      User    @relation(fields: [idUser], references: [idUser])
+  user      User      @relation(fields: [idUser], references: [idUser])
   idUser    String
 }
 

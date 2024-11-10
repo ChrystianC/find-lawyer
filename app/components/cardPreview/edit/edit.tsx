@@ -4,9 +4,8 @@ import DeleteButton from "../delete/delete";
 import AddApoiment from "./add-appoiment/AddApoiment";
 import { Combobox, Transition } from '@headlessui/react';
 import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
-import { getCookie } from "cookies-next";
 
-export default function EditForm ( { edit, lawOffice, deleteLawOffice, newAppoiment, mapLocation, mapSpecialization, service, isNotOffice } )
+export default function EditForm ( { edit, lawOffice, deleteLawOffice, newAppoiment, mapLocation, mapSpecialization, isNotOffice } )
 {
     const [ city, setCity ] = useState( lawOffice.city ?? undefined );
     const [ queryCity, setQueryCity ] = useState( '' );
@@ -15,7 +14,7 @@ export default function EditForm ( { edit, lawOffice, deleteLawOffice, newAppoim
     const [ officeSpecialization, setOfficeSpecialization ] = useState( lawOffice.officeSpecialization ?? undefined );
     const [ queryOfficeSpecialization, setQueryOfficeSpecialization ] = useState( '' );
     const [ profile, setProfile ] = useState( lawOffice.profile ?? undefined );
-   
+
     const options = ( query: string, mapOptions: any ) =>
     {
         if ( query === '' )
@@ -217,7 +216,7 @@ export default function EditForm ( { edit, lawOffice, deleteLawOffice, newAppoim
                     <input type="text" disabled={ isNotOffice } id={ `hero-field-${ lawOffice.idLawOffice }-profile` } name="hero-field" className="w-full bg-gray-100 rounded border bg-opacity-50 border-gray-300 focus:ring-2 focus:ring-indigo-200 focus:bg-transparent focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" value={ profile } onChange={ ( e ) => setProfile( e.target.value ) } />
                 </div>
             </div>
-           
+
             <div className="xl:w-1/3 md:w-1/2 p-4 mb-4">
                 <div className="border border-gray-200 p-6 rounded relative">
                     <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-gray-700 text-gray-200 mb-4">
@@ -232,7 +231,7 @@ export default function EditForm ( { edit, lawOffice, deleteLawOffice, newAppoim
         </div>
         { !isNotOffice ? <><div className="text-4xl flex mx-auto mt-16 text-white  border-0 py-2 px-8 focus:outline-none rounded justify-around"><DeleteButton lawOffice={ lawOffice } deleteLaw={ deleteLawOffice } />
             <button className="focus:outline-none font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2 border-5 border-transparent inline-block hover:border-gray-700  hover:text-gray-900 p-4 border rounded disabled:opacity-15 disabled:border-none" onClick={ () =>
-                edit( city, address, lawOfficeName, officeSpecialization, profile) }>Edit</button>
+                edit( city, address, lawOfficeName, officeSpecialization, profile ) }>Edit</button>
         </div > </> : <></> }
         <div className="flex mx-auto justify-center  mt-1">
             <div className="w-4/5 h-1 rounded-full bg-gray-700 inline-flex"></div>

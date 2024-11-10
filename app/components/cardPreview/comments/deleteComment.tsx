@@ -1,17 +1,14 @@
 'use client';
-import { getCookie } from "cookies-next";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function DeleteComment ( { idComment, del, user, actualUser } )
 {
     const [ isDeleted, setDeleted ] = useState( false );
-    const router = useRouter();
     useEffect( () =>
     {
         if ( isDeleted )
         {
-            del(idComment);
+            del( idComment );
         }
 
     }, [ isDeleted ] );

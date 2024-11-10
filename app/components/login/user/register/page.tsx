@@ -42,7 +42,7 @@ export default function UserPage ()
         return <h2 className="text-rose-900 text-lg title-font font-medium mb-2">Password is not valid</h2>;
 
     };
-    return ( <>
+    return ( <div className='bg-gray-50'>
         <Navbar></Navbar>
         <form onSubmit={ handleSubmit }>
 
@@ -105,7 +105,7 @@ export default function UserPage ()
                 </div>
                 <button type='submit' className="flex mx-auto mt-20 text-white bg-gray-700 border-0 py-2 px-8 focus:outline-none hover:bg-gray-900 rounded text-lg">Sing up</button></div>
         </form>
-    </> );
+    </div> );
 }
 
 const Navbar = () =>
@@ -124,7 +124,6 @@ const Navbar = () =>
                 </span>
                 <div>
                     <Link className='border-5 border-transparent inline-block hover:border-gray-700 text-gray-500 font-semibold hover:text-white py-2 px-4 border rounded' href={ '/components/login/user' }>Login User</Link>
-                    <button className='border-5 border-transparent inline-block hover:border-gray-700 text-gray-500 font-semibold hover:text-white py-2 px-4 border rounded'>Login Kancelaria</button>
                 </div>
             </div>
         </header>

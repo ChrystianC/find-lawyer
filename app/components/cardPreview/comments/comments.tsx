@@ -18,7 +18,7 @@ export default async function FeedBack ( { comments, lawofficeId } )
                     idComment
             }
         } );
-        redirect(`/components/cardPreview?${lawofficeId}`)
+        redirect( `/components/cardPreview?${ lawofficeId }` );
 
     };
     const renderComments = comments.map( async ( { comment, user, idComment } ) =>

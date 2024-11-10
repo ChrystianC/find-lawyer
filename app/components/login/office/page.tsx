@@ -27,15 +27,15 @@ export default function OfficePage ()
             } );
 
             const data = await response.json();
-            await setCookie('office', data, { maxAge: 60 * 60 });
-            await setCookie('auth', data, { maxAge: 60 * 60 });
+            await setCookie( 'office', data, { maxAge: 60 * 60 } );
+            await setCookie( 'auth', data, { maxAge: 60 * 60 } );
 
         } catch ( e )
         {
             console.log( e );
         }
 
-        router.replace('/')
+        router.replace( '/' );
     };
 
     return ( <>
@@ -48,7 +48,7 @@ export default function OfficePage ()
 
 
 
-</h1><p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500s">Log in to improving the process of booking legal services and increasing the number of clients through access to other clients' reviews.</p><div className="flex mt-6 justify-center"><div className="w-24 h-1 rounded-full bg-gray-900 inline-flex"></div></div></div>
+            </h1><p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500s">Log in to improving the process of booking legal services and increasing the number of clients through access to other clients' reviews.</p><div className="flex mt-6 justify-center"><div className="w-24 h-1 rounded-full bg-gray-900 inline-flex"></div></div></div>
             <form onSubmit={ handleSubmit } >
                 <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
 
