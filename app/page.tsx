@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <div className="min-h-screen">
       <NavbarPage />
-      <section className="bg-slate-50">
+      <section className="bg-gray-100">
         <SearchPage />
         <FeedbackPage />
       </section>

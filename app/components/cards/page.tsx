@@ -62,7 +62,7 @@ export default async function LawOfficeCardsPage() {
         : [];
       return (
         <div className="container  px-5 py-5 mx-auto min-h-vh">
-          <div className="lg:w-4/6 relative mx-auto flex flex-wrap border-2 p-5 shadow-md bg-slate-50">
+          <div className="lg:w-4/6 relative mx-auto flex flex-wrap border-2 p-5 shadow-md bg-gray-100">
             <div className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded flex justify-center items-center border-2">
               <div className="flex items-center justify-center py-4 px-4">
                 <div className="max-w-sm w-full shadow-lg overflow-y-auto lg:max-h-72 max-h-60">

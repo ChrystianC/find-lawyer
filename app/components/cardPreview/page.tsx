@@ -126,7 +126,7 @@ export default async function CardPreview() {
   };
 
   return (
-    <div className="bg-slate-50">
+    <div className="bg-gray-100">
       {!cookieStore.get("office")?.name ? (
         <NavbarPage />
       ) : (

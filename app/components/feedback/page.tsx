@@ -21,28 +21,28 @@ export async function FeedbackPage() {
   return (
     <div className="container py-6">
       <div
-        className="flex border-2 rounded-lg border-gray-100 broder-opacity-50 p-8 bg-gray-100"
-        style={{ borderRadius: "10px" }}
+        className="flex border-2 border-gray-100 broder-opacity-50 p-8 bg-gray-800 text-white"
+        style={{ borderRadius: "10px 10px 0px 0px" }}
       >
         {renderSpecializations}
       </div>
-      <div className="flex flex-wrap">
-        <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+      <div className="flex flex-wrap bg-white "         style={{ borderRadius: "0px 0px 10px 10px" }}
+      >
+        <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-gray-200 border-opacity-60">
           <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
-            Shooting Stars
+          Lorem ipsum dolor
           </h2>
           <p className="leading-relaxed text-base mb-4">
-            Fingerstache flexitarian street art 8-bit waistcoat. Distillery
-            hexagon disrupt edison bulbche.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni modi sequi perferendis eius fugit id error, dolore quisquam, ex eum repellat enim totam exercitationem repellendus tempora officiis optio magnam ipsam.
           </p>
           <a className="text-indigo-500 inline-flex items-center">
             Learn More
             <svg
               fill="none"
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               className="w-4 h-4 ml-2"
               viewBox="0 0 24 24"
             >
@@ -52,20 +52,19 @@ export async function FeedbackPage() {
         </div>
         <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
           <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
-            The Catalyzer
+          Lorem ipsum dolor
           </h2>
           <p className="leading-relaxed text-base mb-4">
-            Fingerstache flexitarian street art 8-bit waistcoat. Distillery
-            hexagon disrupt edison bulbche.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla in tenetur id dignissimos totam deserunt sunt qui blanditiis corporis, optio similique reprehenderit dolores commodi nihil expedita quia dolore? Doloribus, quas.
           </p>
           <a className="text-indigo-500 inline-flex items-center">
             Learn More
             <svg
               fill="none"
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               className="w-4 h-4 ml-2"
               viewBox="0 0 24 24"
             >
@@ -75,20 +74,19 @@ export async function FeedbackPage() {
         </div>
         <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
           <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
-            Neptune
+          Lorem ipsum dolor
           </h2>
           <p className="leading-relaxed text-base mb-4">
-            Fingerstache flexitarian street art 8-bit waistcoat. Distillery
-            hexagon disrupt edison bulbche.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, sint culpa qui consectetur labore, explicabo magnam laudantium, itaque ipsam odio accusantium? Assumenda nisi quisquam cumque tempore vero optio dolorum incidunt!
           </p>
           <a className="text-indigo-500 inline-flex items-center">
             Learn More
             <svg
               fill="none"
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               className="w-4 h-4 ml-2"
               viewBox="0 0 24 24"
             >
@@ -98,20 +96,19 @@ export async function FeedbackPage() {
         </div>
         <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
           <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
-            Melanchole
+          Lorem ipsum dolor
           </h2>
           <p className="leading-relaxed text-base mb-4">
-            Fingerstache flexitarian street art 8-bit waistcoat. Distillery
-            hexagon disrupt edison bulbche.
+           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus natus non, quaerat doloremque corporis pariatur accusamus delectus at quo blanditiis quidem? Harum, incidunt nostrum? Nemo consequatur cupiditate earum ipsam. Maiores!
           </p>
           <a className="text-indigo-500 inline-flex items-center">
             Learn More
             <svg
               fill="none"
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               className="w-4 h-4 ml-2"
               viewBox="0 0 24 24"
             >
