@@ -38,7 +38,31 @@ export default async function CardPreview() {
         : undefined;
 
       return (
-        <div className=" bg-gray-100 bg-opacity-75 px-8 pt-6 pb-6 rounded-lg overflow-hidden text-center relative m-5">
+        <div className=" bg-gray-200 bg-opacity-75 px-8 pt-6 pb-6 rounded-lg overflow-hidden relative text-center m-5">
+          <div className="absolute right-4 top-1">
+            <>
+              <button
+                className="leading-relaxed text-base focus:outline-none font-medium  text-gray-800 dark:text-gray-100 mt-2 border-5 border-transparent inline-block hover:border-gray-700  hover:text-gray-900 p-1 border rounded disabled:opacity-15 disabled:border-none"
+                disabled
+              >
+                {" "}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18 18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </>
+          </div>
           <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
             Appoiment
           </h2>
@@ -186,7 +210,7 @@ export default async function CardPreview() {
         </div>
         <div className="flex flex-wrap m-4">
           <div className="xl:w-1/3 md:w-1/2 p-4">
-            <div className="border border-gray-200 p-6 rounded ">
+            <div className="border border-gray-200 p-6 rounded bg-slate-50 ">
               <div className="w-10 h-10 flex justify-center items-center rounded-full bg-gray-700  mb-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

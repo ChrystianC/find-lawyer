@@ -22,7 +22,7 @@ export default async function FeedBack({ comments, lawofficeId }) {
     const owner = await prisma.user.findFirst({ where: { idUser: user } });
     return (
       <div className="xl:w-1/3 md:w-1/2 p-4">
-        <div className="border border-gray-200 p-6 rounded h-full relative">
+        <div className="border border-gray-100 p-6 rounded h-full relative bg-slate-50">
           <div className="absolute right-4">
             <DeleteComment
               idComment={idComment}
