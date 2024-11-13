@@ -26,7 +26,10 @@ export async function NavbarPage() {
           />
           <span className="ml-3 text-xl text-white">Lawyler</span>
         </a>
-        <nav className="md:ml-auto flex-wrap items-center text-base justify-center hidden lg:block"></nav>
+        <nav className="md:ml-auto flex-wrap items-center text-base justify-center  lg:block">
+          {" "}
+          <a className="mr-5 hover:text-gray-100" href="../feedback">About us</a>
+        </nav>
         <span className="lg:border-l lg:border-gray-700 lg:pl-6 lg:py-7"></span>
         <div>
           {auth !== undefined ? (
@@ -35,8 +38,8 @@ export async function NavbarPage() {
                 user?.value
                   ? `/components/userPreview?${user.value}`
                   : office?.value
-                    ? `/components/cardPreview?${findOffice.idLawOffice}`
-                    : "/"
+                  ? `/components/cardPreview?${findOffice.idLawOffice}`
+                  : "/"
               }
             >
               {" "}

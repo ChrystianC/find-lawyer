@@ -26,14 +26,14 @@ export async function FeedbackPage() {
       >
         {renderSpecializations}
       </div>
-      <div className="flex flex-wrap bg-white "         style={{ borderRadius: "0px 0px 10px 10px" }}
+      <div className="flex flex-wrap bg-white " style={{ borderRadius: "0px 0px 10px 10px" }}
       >
         <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-gray-200 border-opacity-60">
           <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
-          Lorem ipsum dolor
+          Find suitable lawyer
           </h2>
           <p className="leading-relaxed text-base mb-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni modi sequi perferendis eius fugit id error, dolore quisquam, ex eum repellat enim totam exercitationem repellendus tempora officiis optio magnam ipsam.
+           Choose among {Math.floor(Math.random() * 3000000) + 10000} lawyer and law offices. Who's specialization in yours nagging law problem 
           </p>
           <a className="text-indigo-500 inline-flex items-center">
             Learn More
@@ -52,10 +52,10 @@ export async function FeedbackPage() {
         </div>
         <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
           <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
-          Lorem ipsum dolor
+          Find the date that suits you
           </h2>
           <p className="leading-relaxed text-base mb-4">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla in tenetur id dignissimos totam deserunt sunt qui blanditiis corporis, optio similique reprehenderit dolores commodi nihil expedita quia dolore? Doloribus, quas.
+          Pick the date that suits you, provide your details, confirm... and you are good to go.
           </p>
           <a className="text-indigo-500 inline-flex items-center">
             Learn More
@@ -74,10 +74,10 @@ export async function FeedbackPage() {
         </div>
         <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
           <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
-          Lorem ipsum dolor
+          Schedule your time
           </h2>
           <p className="leading-relaxed text-base mb-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, sint culpa qui consectetur labore, explicabo magnam laudantium, itaque ipsam odio accusantium? Assumenda nisi quisquam cumque tempore vero optio dolorum incidunt!
+            You get easy access to your future appoiments. We also sendu you mail notyfication
           </p>
           <a className="text-indigo-500 inline-flex items-center">
             Learn More
@@ -96,10 +96,10 @@ export async function FeedbackPage() {
         </div>
         <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
           <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
-          Lorem ipsum dolor
+          Search among other clients opinions
           </h2>
           <p className="leading-relaxed text-base mb-4">
-           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus natus non, quaerat doloremque corporis pariatur accusamus delectus at quo blanditiis quidem? Harum, incidunt nostrum? Nemo consequatur cupiditate earum ipsam. Maiores!
+           You can easly search your experiences about your meeting with laywer
           </p>
           <a className="text-indigo-500 inline-flex items-center">
             Learn More

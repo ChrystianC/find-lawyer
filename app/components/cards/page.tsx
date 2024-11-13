@@ -128,14 +128,14 @@ export default async function LawOfficeCardsPage() {
                   </a>
                 </span>
               </div>
-              <div className="leading-relaxed">
+              <div >
                 <Wares
                   services={service}
                   officeSpecialization={officeSpecialization}
                 />
               </div>
               <div className="border-t-2 mt-1 pt-2 title-font">
-                The law office specializating in {officeSpecialization}
+                The law office specializating in {officeSpecialization}. Law office is veryficated, no worries about your personal data. We use best security system
               </div>
             </div>
           </div>
